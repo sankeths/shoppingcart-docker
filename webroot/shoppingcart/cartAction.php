@@ -36,7 +36,7 @@ function callAPI($method, $url, $data, $auth)
     return $result;
 }
 // initialize shopping cart class
-include 'Cart.php';
+include('Cart.php');
 include('session.php');
 $cart                     = new Cart;
 $customer_id              = $_SESSION['cus_id'];
