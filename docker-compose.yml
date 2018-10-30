@@ -1,0 +1,40 @@
+# ./docker-compose.yml
+
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: India@123
+      MYSQL_DATABASE: cartapplication
+      MYSQL_USER: sanketh
+      MYSQL_PASSWORD: India@123
+    command: mysqld --user=root
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    ports:
+    - "9000:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+    - db
+    external_links:
+    - db
+    ports:
+    - "8098:80"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: India@123
+      MYSQL_ROOT_PASSWORD: India@123
+      PMA_HOST: 
+
+  web:
+    build: .
+    ports:
+      - "8099:80"
+    links:
+      - db
+    volumes:
+      - /code/webroot:/var/www/html/

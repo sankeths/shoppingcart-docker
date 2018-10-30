@@ -1,0 +1,376 @@
+---
+swagger: "2.0"
+info:
+  description: A supercool demo site that takes care of your uber cool demos.
+  version: 1.0.0
+  title: Awesome Shopping Store
+  termsOfService: http://smartbear.com
+  contact:
+    email: sanketh.shanbhag@smartbear.com
+  license:
+    name: Private License
+    url: http://smartbear.com
+host: localhost
+basePath: /php/demo
+schemes:
+- http
+paths:
+  /{type}/get_login/:
+    get:
+      description: Login to user account
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: type
+        in: path
+        description: json or xml
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            xml:
+              name: Response
+              wrapped: false
+            items:
+              $ref: '#/definitions/inline_response_200'
+      security:
+      - basic: []
+  /{type}/get_products/:
+    get:
+      description: Get list of all products
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: type
+        in: path
+        description: json or xml
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            xml:
+              name: Products
+              wrapped: true
+            items:
+              $ref: '#/definitions/inline_response_200_1'
+      security:
+      - basic: []
+  /{type}/get_orders/:
+    get:
+      description: Get list of all orders for the user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: type
+        in: path
+        description: json or xml
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            xml:
+              name: Orders
+              wrapped: true
+            items:
+              $ref: '#/definitions/inline_response_200_2'
+      security:
+      - basic: []
+  /{type}/post_order/:
+    post:
+      description: Get list of all orders for the user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: type
+        in: path
+        description: json or xml
+        required: true
+        type: string
+      - in: body
+        name: POSTDATA
+        description: Creates a new employee in DB
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/POSTDATA'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            xml:
+              name: Orders
+              wrapped: false
+            items:
+              $ref: '#/definitions/inline_response_200_3'
+      security:
+      - basic: []
+  /{type}/get_order/:
+    get:
+      description: Get order details
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: type
+        in: path
+        description: json or xml
+        required: true
+        type: string
+      - name: order_id
+        in: query
+        description: Order Id
+        required: true
+        type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            xml:
+              name: Orders
+              wrapped: true
+            items:
+              $ref: '#/definitions/inline_response_200_4'
+      security:
+      - basic: []
+securityDefinitions:
+  basic:
+    type: basic
+definitions:
+  POSTDATA:
+    properties:
+      quantity:
+        type: integer
+        example: 1
+        description: Product Quantity
+      product_id:
+        type: integer
+        example: 1
+        description: Product Id
+  inline_response_200_1:
+    properties:
+      id:
+        type: integer
+        example: 1
+        description: Product id
+      name:
+        type: string
+        example: iPhone
+        description: Product Name
+      description:
+        type: string
+        example: This is an rare iphone
+        description: Product Description
+      image:
+        type: string
+        example: iphone.jpg
+        description: Product Image
+      price:
+        type: number
+        example: 999.0
+        description: Price of the product
+      created:
+        type: string
+        example: 2018-05-05 00:00:00
+        description: Date time of creation
+      modified:
+        type: string
+        example: 2018-05-05 00:00:00
+        description: Date time of creation
+      status:
+        type: integer
+        example: 1 or 0
+        description: Status of the user
+    example:
+      image: iphone.jpg
+      price: 999.0
+      created: 2018-05-05 00:00:00
+      name: iPhone
+      description: This is an rare iphone
+      modified: 2018-05-05 00:00:00
+      id: 1
+      status: 1 or 0
+  inline_response_200:
+    properties:
+      id:
+        type: integer
+        example: 1
+        description: User id
+      name:
+        type: string
+        example: Sanketh
+        description: Users first name
+      last_name:
+        type: string
+        example: Shanbhag
+        description: Users last name
+      email:
+        type: string
+        example: sanketh.shanbhag@smartbear.com
+        description: Users email
+      phone:
+        type: integer
+        example: 9482517924
+        description: users phone number
+      eddress:
+        type: string
+        example: Bangalore, India
+        description: Users address
+    example:
+      phone: 9482517924
+      name: Sanketh
+      eddress: Bangalore, India
+      last_name: Shanbhag
+      id: 1
+      email: sanketh.shanbhag@smartbear.com
+  inline_response_200_2:
+    properties:
+      id:
+        type: integer
+        example: 1
+        description: Order's ID
+      customer_id:
+        type: integer
+        example: 1
+        description: Customer ID
+      total_price:
+        type: number
+        example: 999.0
+        description: Total Order Price
+      status:
+        type: integer
+        example: 0
+        description: Status of the order for internal use.
+      order_id:
+        type: integer
+        example: 1
+        description: Order ID
+      quantity:
+        type: integer
+        example: 1
+        description: Quantity
+      price:
+        type: number
+        example: 1.0
+        description: Price of the product
+      image:
+        type: string
+        example: iphone.jpeg
+        description: Image of the product
+      paymenttype:
+        type: string
+        example: card
+        description: Order payment method
+    example:
+      image: iphone.jpeg
+      quantity: 1
+      total_price: 999.0
+      price: 1.0
+      id: 1
+      customer_id: 1
+      order_id: 1
+      paymenttype: card
+      status: 0
+  inline_response_200_3:
+    properties:
+      Order ID:
+        type: integer
+        example: 298
+        description: Order ID
+      Order Item ID:
+        type: integer
+        example: 643
+        description: Product Id
+      Item Total Price:
+        type: number
+        example: 1998.0
+        description: Total price of item
+      Total Order Price:
+        type: number
+        example: 3996.0
+        description: Total price of the order
+    example:
+      Item Total Price: 1998.0
+      Order Item ID: 643
+      Order ID: 298
+      Total Order Price: 3996.0
+  inline_response_200_4:
+    properties:
+      id:
+        type: integer
+        example: 1
+        description: Order's ID
+      customer_id:
+        type: integer
+        example: 1
+        description: Customer ID
+      name:
+        type: string
+        example: Iphone
+        description: product Name
+      total_price:
+        type: number
+        example: 999.0
+        description: Total Order Price
+      status:
+        type: integer
+        example: 0
+        description: Status of the order for internal use.
+      order_id:
+        type: integer
+        example: 1
+        description: Order ID
+      quantity:
+        type: integer
+        example: 1
+        description: Quantity
+      price:
+        type: number
+        example: 1.0
+        description: Price of the product
+      paymenttype:
+        type: string
+        example: card
+        description: Order payment method
+    example:
+      quantity: 1
+      total_price: 999.0
+      price: 1.0
+      name: Iphone
+      id: 1
+      customer_id: 1
+      order_id: 1
+      paymenttype: card
+      status: 0
+parameters:
+  pathParam:
+    name: type
+    in: path
+    description: json or xml
+    required: true
+    type: string
