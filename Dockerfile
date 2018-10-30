@@ -28,4 +28,3 @@ RUN test -e $httpd_conf && echo "Include $httpd_conf" >> /etc/httpd/conf/httpd.c
 EXPOSE 80
 CMD [ cp -R "/code/webroot/." "/var/www/html"]
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
-ENTRYPOINT cp -R "/code/webroot/." "/var/www/html"
