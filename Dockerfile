@@ -24,5 +24,7 @@ RUN sed -i -e "s|^;date.timezone =.*$|date.timezone = Asia/Tokyo|" /etc/php.ini
 ADD . $code_root
 RUN test -e $httpd_conf && echo "Include $httpd_conf" >> /etc/httpd/conf/httpd.conf
 
+CMD[ cp -R "/code/webroot" "/var/www/html"]
+
 EXPOSE 80
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
