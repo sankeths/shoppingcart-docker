@@ -37,4 +37,4 @@ services:
     links:
       - db
     volumes:
-      - ./var/www/html/:/code/webroot/.:
+      - ./var/www/html/:/code/webroot/.
