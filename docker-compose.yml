@@ -36,5 +36,3 @@ services:
       - "8099:80"
     links:
       - db
-    volumes:
-      - /code/webroot/.:/var/www/html/
