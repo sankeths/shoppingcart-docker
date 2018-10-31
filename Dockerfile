@@ -5,7 +5,9 @@ ENV code_root /code
 ENV httpd_conf ${code_root}/httpd.conf
 
 
-RUN apk add yum
+RUN apk update && \
+    apk upgrade && \
+    apk add npm
 
 RUN yum install -y httpd
 RUN yum install --enablerepo=epel,remi-php56,remi -y \
