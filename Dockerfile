@@ -1,4 +1,4 @@
-FROM centos:6
+FROM alpine:3.7
 MAINTAINER Sanketh Shanbhag<s.sanketh@gmail.com>
 
 ENV code_root /code
