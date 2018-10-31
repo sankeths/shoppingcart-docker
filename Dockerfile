@@ -22,8 +22,9 @@ RUN yum install --enablerepo=epel,remi-php56,remi -y \
 RUN sed -i -e "s|^;date.timezone =.*$|date.timezone = Asia/Tokyo|" /etc/php.ini
 
 ADD . $code_root
-RUN test -e $httpd_conf && echo "Include $httpd_conf" >> /etc/httpd/conf/httpd.conf
+Add webroot/. "/var/www/html"
 
+RUN test -e $httpd_conf && echo "Include $httpd_conf" >> /etc/httpd/conf/httpd.conf
 
 EXPOSE 80
 CMD [ cp -R "/code/webroot/." "/var/www/html"]
